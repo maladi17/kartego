@@ -24,6 +24,24 @@ try these manuals:
 
 ** pay attention to the dissector i have added to the repo in oder to sniff the packet.
 
+### Usage
+
+the following is the main menu:
+
+![main menu](https://github.com/maladi17/kartego/blob/master/man.PNG)
+
+in order to send a pcap,just set a wanted pcap size (if the data you have given is smaller than the size,it will randomize the rest of data). and then use the send command:
+
+![send](https://github.com/maladi17/kartego/blob/master/send.JPG)
+
+this is the wireshark look (without the appropriate dissector). pay attention I have created a bogus packet by intention...
+
+![send](https://github.com/maladi17/kartego/blob/master/pcap.JPG)
+
+**important note- the packet data should be in packet.txt in the folder. a byte per a line (I know...yak)
+
+
+
 ## Authors
 
 * **maladi17**- I am really busy, but open for suggestions to improve the repo or bug fixing. just open an issue or leave a mail and I will do my best to improve it.
