@@ -1,7 +1,7 @@
 
 # kartego
 
-A light version of scapy in c.  for windows only I quickly made during a penetration test.
+A light version of scapy in c  I quickly made during a penetration test.  for windows only.
 
 ## Getting Started
 
