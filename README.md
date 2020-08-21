@@ -11,8 +11,12 @@ A light version of scapy in c.  for windows only I quickly made during a penetra
 the winpcap library should be installed in the project.
 try these manuals:
       https://www.winpcap.org/docs/docs_412/html/group__compilation.html
+      
   or 
-      https://youtu.be/YpnrR7D_lRI  (it's not a fishing...just search for C++ & PCAP Files made by NYUCyFor in youtube =])
+  
+  
+  
+ https://youtu.be/YpnrR7D_lRI  (it's not a fishing...just search for C++ & PCAP Files made by NYUCyFor in youtube =])
       
   
   
