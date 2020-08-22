@@ -42,7 +42,7 @@ this is the wireshark look (without the appropriate dissector). pay attention I 
 
 ![send](https://github.com/maladi17/kartego/blob/master/pcap.JPG)
 
-**important note- the packet data should be in packet.txt in the folder. a byte per a line (I know...yak)
+**important note- the packet data should be in packet.txt in the folder. a byte per a line in hex (I know...yak)
 
 
 
