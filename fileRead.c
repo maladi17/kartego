@@ -36,7 +36,8 @@ int main_fileRead(int size) {
 	char path[200];
 	u_char *packet;
 	packet = (unsigned char *)malloc(size * sizeof(int));
-	printf("please enter a path:\n");
+	printf("please enter a path (like C:/Users/Adi/Documents/Visual/Projects 2/kartego/packet.txt): \n");
+	
 	scanf("%200[^\n]%*c", path);
 	if ((filePointer = fopen(path, "r")) == NULL) {
 		printf("Error! opening file");
