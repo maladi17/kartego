@@ -2,6 +2,7 @@
 #include <stdlib.h> // For exit() function
 #include <ctype.h>
 #include "pcap.h"
+#include "pktheaders.h"
 
 int ishexadecimal(char *line) {
 	int i = 0;
@@ -26,8 +27,8 @@ int ishexadecimal(char *line) {
 	return 1;
 }
 
-int main_fileRead(int size) {
-
+struct packetC main_fileRead(int size) {
+	struct packetC packetdata;
 	FILE* filePointer;
 	char buffer[255];
 	int j = 0;
@@ -60,12 +61,14 @@ int main_fileRead(int size) {
 			printf("file is not ok!!! please remove empty lines besides the last one and ensure only to hex chars in each line.");
 			free(packet);
 			exit(1);
-			return -1;
+			return;
 		}
 	}
 
 	fclose(filePointer);
-	main_send(packet, size, j);
+	packetdata.data = packet; //should i free this??
+	packetdata.size = j;
+	
 
-	return 0;
+	return packetdata;
 }

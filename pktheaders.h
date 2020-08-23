@@ -1,6 +1,11 @@
 #include "pcap.h"
 #define commandN 6
 
+struct packetC {
+	u_char *data;
+	int size;
+};
+
 typedef struct ip_address{
     u_char byte1;
     u_char byte2;

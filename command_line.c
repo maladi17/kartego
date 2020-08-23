@@ -1,6 +1,7 @@
 #include <string.h> 
 #include <stdio.h>
 #include <stdlib.h>
+#include "pktheaders.h"
 
 
 #define commandN 6
@@ -41,11 +42,12 @@ int cmd_main()
 	char buf[BUFSIZ];
 	char word[20];
 	int ret, pktSize = 0;
-
+	struct packetC pkt;
 	banner();
 	helperCommands();
 	printf("let's start =]\n");
 	printf("\n your command is my job:\n");
+
 	while (1) {
 		printf("\n~~~>");
 		gets(word);
@@ -78,8 +80,9 @@ int cmd_main()
 
 		case(4):
 
-
-			main_fileRead(pktSize);
+			
+			pkt = main_fileRead(pktSize);
+			main_send(pkt.data, pktSize, pkt.size);
 
 
 			break;
