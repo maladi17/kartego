@@ -85,7 +85,7 @@ int main_send(unsigned char *packet, int capacity, int owned)
 		free(packet);
 		return -1;
 	}
-	free(packet); // any check??
+	free(packet); 
 	printf("the packet was sent!\n\n");
 	return 0;
 }
