@@ -6,6 +6,7 @@ void helperCommands()
 	printf("\n	banner			show the app banner...\n\n");
 	printf("\n	size			set your wanted packet size has to be ran before the file command...\n\n");
 	printf("\n	send			set your wanted file fields and send...\n\n");
+	printf("\n	commented		set your wanted file fields and send which includes comments...\n\n");
 	printf("\n	env 			gets environment variables...\n\n");
 	printf("\n	exit			attack is complete! time to run...\n\n");
 	printf("\n\n\n");

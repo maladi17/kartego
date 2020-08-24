@@ -1,5 +1,5 @@
 #include "pcap.h"
-#define commandN 6
+#define commandN 7
 
 struct packetC {
 	u_char *data;
@@ -37,3 +37,5 @@ typedef struct udp_header{
     u_short len;            // Datagram length
     u_short crc;            // Checksum
 }udp_header;
+
+struct packetC main_fileRead(int size, int isComment);

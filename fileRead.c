@@ -27,7 +27,7 @@ int ishexadecimal(char *line) {
 	return 1;
 }
 
-struct packetC main_fileRead(int size) {
+struct packetC main_fileRead(int size, int isComment) {
 	struct packetC packetdata;
 	FILE* filePointer;
 	char buffer[255];
@@ -35,14 +35,22 @@ struct packetC main_fileRead(int size) {
 	u_char hexC;
 	int num;
 	char path[200];
+	int del = 0;
 	u_char *packet;
 	packet = (unsigned char *)malloc(size * sizeof(int));
-	printf("please enter a path (like C:/Users/Adi/Documents/Visual/Projects 2/kartego/packet.txt): \n");
 	
-	scanf("%200[^\n]%*c", path);
+	if (isComment) {
+		memset(path, '\0', sizeof(path));
+		strncpy(path, "temp.txt", 8);
+	}
+	else {
+		printf("please enter a path (like C:/Users/Adi/Documents/Visual/Projects 2/kartego/packet.txt): \n");
+		scanf("%200[^\n]%*c", path);
+	}
+
 	if ((filePointer = fopen(path, "r")) == NULL) {
 		printf("Error! opening file");
-		printf("the packet.txt does not exists in the app folder. see ya.");
+		printf("the file does not exists in the folder. see ya.");
 		free(packet);
 		exit(1);
 	}
@@ -66,7 +74,14 @@ struct packetC main_fileRead(int size) {
 	}
 
 	fclose(filePointer);
-	packetdata.data = packet; //should i free this??
+	if (isComment) {
+		del = remove("temp.txt");
+		if (del) {
+			printf("the file is not Deleted");
+			exit(1);
+		}
+	}
+	packetdata.data = packet; 
 	packetdata.size = j;
 	
 

@@ -4,9 +4,9 @@
 #include "pktheaders.h"
 
 
-#define commandN 6
+#define commandN 7
 
-char commands[commandN][20] = { "exit","interfaces", "banner", "size", "send","env" };
+char commands[commandN][20] = { "exit","interfaces", "banner", "size", "send","env", "commented" };
 
 int compare_string(char *first, char *second) {
 	while (*first == *second) {
@@ -81,7 +81,7 @@ int cmd_main()
 		case(4):
 
 			
-			pkt = main_fileRead(pktSize);
+			pkt = main_fileRead(pktSize, 0);
 			main_send(pkt.data, pktSize, pkt.size);
 
 
@@ -90,11 +90,19 @@ int cmd_main()
 
 
 			printf("size of wanted file is %d\n", pktSize);
-			printf("the packet's fields are in packet.txt\n");
+			
 
 
 			break;
 
+		case(6):
+
+			comments_killer();
+			pkt = main_fileRead(pktSize, 1);
+			main_send(pkt.data, pktSize, pkt.size);
+
+
+			break;
 		default:
 			printf("\nthe following is our commands:\n");
 			helperCommands();
