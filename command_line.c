@@ -4,9 +4,9 @@
 #include "pktheaders.h"
 
 
-#define commandN 7
+#define commandN 8
 
-char commands[commandN][20] = { "exit","interfaces", "banner", "size", "send","env", "commented" };
+char commands[commandN][20] = { "exit","interfaces", "banner", "size", "send","env", "commented", "pcap2tool" };
 
 int compare_string(char *first, char *second) {
 	while (*first == *second) {
@@ -98,6 +98,15 @@ int cmd_main()
 		case(6):
 
 			comments_killer();
+			pkt = main_fileRead(pktSize, 1);
+			main_send(pkt.data, pktSize, pkt.size);
+
+
+			break;
+
+		case(7):
+
+			hexstream2tool();
 			pkt = main_fileRead(pktSize, 1);
 			main_send(pkt.data, pktSize, pkt.size);
 

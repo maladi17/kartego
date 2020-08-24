@@ -1,5 +1,5 @@
 #include "pcap.h"
-#define commandN 7
+#define commandN 8
 
 struct packetC {
 	u_char *data;

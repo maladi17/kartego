@@ -8,6 +8,7 @@ void helperCommands()
 	printf("\n	send			set your wanted file fields and send...\n\n");
 	printf("\n	commented		set your wanted file fields and send which includes comments...\n\n");
 	printf("\n	env 			gets environment variables...\n\n");
+	printf("\n	pcap2tool 		transfer pcap file to the tool file...\n\n");
 	printf("\n	exit			attack is complete! time to run...\n\n");
 	printf("\n\n\n");
 }

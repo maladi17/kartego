@@ -86,3 +86,36 @@ void single_comment()
 	}
 
 }
+
+int hexstream2tool(void)
+{
+	char path2[200];
+	char c;
+	int letters = 0;
+	printf("please enter your file path:");
+	scanf("%200[^\n]%*c", path2);
+	fp = fopen(path2, "r");   // open the first file in read mode
+	if (fp == NULL) {
+		printf("Error! opening file");
+		printf("the your comment file.txt does not exists in the app folder. see ya.");
+
+		exit(1);
+	}
+
+	fp2 = fopen("temp.txt", "w");
+
+	while ((c = fgetc(fp)) != EOF) {      // read the file character by character
+		fputc(c, fp2);
+		letters = letters + 1;
+		if (letters == 2) {
+			letters = 0;
+			fputc('\n', fp2);
+		}
+	}
+							//  close both the files at the end of the program
+	fclose(fp);
+	fclose(fp2);
+
+	return 0;
+}
+
