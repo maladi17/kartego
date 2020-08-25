@@ -79,12 +79,15 @@ int main_send(unsigned char *packet, int capacity, int owned)
 	}
 
 	/* Send down the packet */
-	if (pcap_sendpacket(fp, packet, capacity) != 0)
-	{
-		fprintf(stderr, "\nError sending the packet: \n", pcap_geterr(fp));
-		free(packet);
-		return -1;
-	}
+	
+	
+		if (pcap_sendpacket(fp, packet, capacity) != 0)
+		{
+			fprintf(stderr, "\nError sending the packet: \n", pcap_geterr(fp));
+			free(packet);
+			return -1;
+		}
+	
 	free(packet); 
 	printf("the packet was sent!\n\n");
 	return 0;

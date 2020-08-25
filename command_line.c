@@ -43,6 +43,7 @@ int cmd_main()
 	char word[20];
 	int ret, pktSize = 0;
 	struct packetC pkt;
+
 	banner();
 	helperCommands();
 	printf("let's start =]\n");
@@ -88,11 +89,7 @@ int cmd_main()
 			break;
 		case(5):
 
-
 			printf("size of wanted file is %d\n", pktSize);
-			
-
-
 			break;
 
 		case(6):
@@ -100,8 +97,6 @@ int cmd_main()
 			comments_killer();
 			pkt = main_fileRead(pktSize, 1);
 			main_send(pkt.data, pktSize, pkt.size);
-
-
 			break;
 
 		case(7):
@@ -109,9 +104,8 @@ int cmd_main()
 			hexstream2tool();
 			pkt = main_fileRead(pktSize, 1);
 			main_send(pkt.data, pktSize, pkt.size);
-
-
 			break;
+
 		default:
 			printf("\nthe following is our commands:\n");
 			helperCommands();
