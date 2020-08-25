@@ -1,9 +1,10 @@
 #include "pcap.h"
-#define commandN 8
+#define commandN 9
 
 struct packetC {
 	u_char *data;
-	int size;
+	int size; //currently owned
+	int total; // size of packet
 };
 
 typedef struct ip_address{

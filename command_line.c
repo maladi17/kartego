@@ -4,9 +4,9 @@
 #include "pktheaders.h"
 
 
-#define commandN 8
+#define commandN 9
 
-char commands[commandN][20] = { "exit","interfaces", "banner", "size", "send","env", "commented", "pcap2tool" };
+char commands[commandN][20] = { "exit","interfaces", "banner", "size", "add","env", "commented", "pcap2tool", "send" };
 
 int compare_string(char *first, char *second) {
 	while (*first == *second) {
@@ -43,7 +43,6 @@ int cmd_main()
 	char word[20];
 	int ret, pktSize = 0;
 	struct packetC pkt;
-
 	banner();
 	helperCommands();
 	printf("let's start =]\n");
@@ -83,29 +82,41 @@ int cmd_main()
 
 			
 			pkt = main_fileRead(pktSize, 0);
-			main_send(pkt.data, pktSize, pkt.size);
+			
 
 
 			break;
 		case(5):
 
+
 			printf("size of wanted file is %d\n", pktSize);
+			
+
+
 			break;
 
 		case(6):
 
 			comments_killer();
 			pkt = main_fileRead(pktSize, 1);
-			main_send(pkt.data, pktSize, pkt.size);
+			
+
+
 			break;
 
 		case(7):
 
 			hexstream2tool();
 			pkt = main_fileRead(pktSize, 1);
-			main_send(pkt.data, pktSize, pkt.size);
-			break;
+			
 
+
+			break;
+		case(8):
+			if (!pkt) {
+				main_send(pkt.data, pktSize, pkt.size);
+			}
+			break;
 		default:
 			printf("\nthe following is our commands:\n");
 			helperCommands();

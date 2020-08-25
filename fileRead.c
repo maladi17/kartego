@@ -57,18 +57,15 @@ struct packetC main_fileRead(int size, int isComment) {
 
 	while (fgets(buffer, size, filePointer)) {
 
-		if (ishexadecimal(buffer) == 1)
+		if (ishexadecimal(buffer) == 1 )
 		{
 
 			num = (int)strtol(buffer, NULL, 16);       // number base 16
-			printf(buffer);
 			packet[j] = (unsigned char)num;
 			j++;
-			if (j>size) {
+			if (j > size)
 				break;
-			}
 		}
-		
 		else
 		{
 			printf("file is not ok!!! please remove empty lines besides the last one and ensure only to hex chars in each line.");
@@ -88,6 +85,7 @@ struct packetC main_fileRead(int size, int isComment) {
 	}
 	packetdata.data = packet; 
 	packetdata.size = j;
+	packetdata.total = size;
 	
 
 	return packetdata;
