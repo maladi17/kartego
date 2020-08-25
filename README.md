@@ -44,7 +44,11 @@ this is the wireshark look (without the appropriate dissector). pay attention I 
 
 **important note- the packet data should be in a txt file in a folder of your choice. a byte per a line in hex (I know...yak)
 
+###Updates
 
+- [x] support to files contains comments (only // for now and in the same line of the hex. Check out our packet.txt example.
+
+- [x] support in sending packets from wireshark to the wire.
 
 ## Authors
 
