@@ -4,10 +4,17 @@
 #include "pcap.h"
 #include "pktheaders.h"
 
-int main_send(unsigned char *packet, int capacity, int owned)
+int freeAll(struct packetC packet[30], int occupied) {
+	int i;
+	for (i = 0; i < occupied; i++)
+		free(packet[i].data);
+	return 1;
+}
+
+int main_send(struct packetC packet[30], int occupiedinArr, int max)
 {
 	pcap_t *fp;
-
+	int j = 0;
 
 	pcap_if_t *alldevs;
 	pcap_if_t *d;
@@ -23,7 +30,7 @@ int main_send(unsigned char *packet, int capacity, int owned)
 	if (pcap_findalldevs_ex(PCAP_SRC_IF_STRING, NULL, &alldevs, errbuf) == -1)
 	{
 		fprintf(stderr, "Error in pcap_findalldevs: %s\n", errbuf);
-		free(packet);
+		freeAll(packet, occupiedinArr);
 		exit(1);
 	}
 
@@ -39,7 +46,7 @@ int main_send(unsigned char *packet, int capacity, int owned)
 	if (i == 0)
 	{
 		printf("\nNo interfaces found! Make sure WinPcap is installed.\n");
-		free(packet);
+		freeAll(packet, occupiedinArr);
 		return -1;
 	}
 
@@ -51,14 +58,14 @@ int main_send(unsigned char *packet, int capacity, int owned)
 		printf("\nInterface number out of range.\n");
 		/* Free the device list */
 		pcap_freealldevs(alldevs);
-		free(packet);
+		freeAll(packet, occupiedinArr);
 		return -1;
 	}
 
 	/* Jump to the selected adapter */
 	for (d = alldevs, i = 0; i< inum - 1; d = d->next, i++);
 	if ((fp = pcap_open(d->name,            // name of the device
-		capacity,                // portion of the packet to capture (only the first capacity bytes)
+		max,                // portion of the packet to capture (only the first capacity bytes)
 		PCAP_OPENFLAG_PROMISCUOUS,  // promiscuous mode
 		1000,               // read timeout
 		NULL,               // authentication on the remote machine
@@ -66,26 +73,31 @@ int main_send(unsigned char *packet, int capacity, int owned)
 	)) == NULL)
 	{
 		fprintf(stderr, "\nUnable to open the adapter. %s is not supported by WinPcap\n", d->name);
-		free(packet);
+		freeAll(packet, occupiedinArr);
 		return -1;
 	}
-
-
 	
-	/* Fill the rest of the packet */
-	for (i = owned; i<capacity; i++)
-	{
-		packet[i] = i % 256;
-	}
 
-	/* Send down the packet */
-	if (pcap_sendpacket(fp, packet, capacity) != 0)
-	{
-		fprintf(stderr, "\nError sending the packet: \n", pcap_geterr(fp));
-		free(packet);
-		return -1;
+	for (j = 0; j < occupiedinArr; j++) {
+		/* Fill the rest of the packet */
+		for (i = packet[j].size; i < packet[j].total; i++)
+		{
+			packet[j].data[i] = i % 256;
+		}
 	}
-	free(packet); 
-	printf("the packet was sent!\n\n");
+	
+	for (j = 0; j < occupiedinArr; j++) {
+		/* Send down the packet */
+		if (pcap_sendpacket(fp, packet[j].data, packet[j].total) != 0)
+		{
+			fprintf(stderr, "\nError sending the packet: \n", pcap_geterr(fp));
+			freeAll(packet, occupiedinArr);
+			return -1;
+		}
+		printf("a packet was sent.\n\n");
+	}
+		freeAll(packet, occupiedinArr);
+		
+	
 	return 0;
 }

@@ -42,7 +42,9 @@ int cmd_main()
 	char buf[BUFSIZ];
 	char word[20];
 	int ret, pktSize = 0;
-	struct packetC pkt;
+	struct packetC pkt[30];
+	int occupiedinArr = 0;
+	int max = 100;
 	banner();
 	helperCommands();
 	printf("let's start =]\n");
@@ -80,42 +82,56 @@ int cmd_main()
 
 		case(4):
 
-			
-			pkt = main_fileRead(pktSize, 0);
-			
-
-
+			if (occupiedinArr < 30) {
+				pkt[occupiedinArr] = main_fileRead(pktSize, 0);
+				occupiedinArr = occupiedinArr + 1;
+				if (max < pktSize)
+					max = pktSize;
+			}
+			else if (occupiedinArr == 30)
+				printf("the packets array is full. try to send those in order to get a choise to send others.");
 			break;
 		case(5):
 
 
 			printf("size of wanted file is %d\n", pktSize);
-			
+			printf("currently %d are waiting in the stack", occupiedinArr);
 
 
 			break;
 
 		case(6):
-
-			comments_killer();
-			pkt = main_fileRead(pktSize, 1);
-			
-
-
+			if (occupiedinArr < 30) {
+				comments_killer();
+				pkt[occupiedinArr] = main_fileRead(pktSize, 1);
+				occupiedinArr = occupiedinArr + 1;
+				if (max < pktSize)
+					max = pktSize;
+			}
+			else if (occupiedinArr == 30)
+				printf("the packets array is full. try to send those in order to get a choise to send others.");
 			break;
 
 		case(7):
-
-			hexstream2tool();
-			pkt = main_fileRead(pktSize, 1);
-			
-
-
+			if (occupiedinArr < 30) {
+				hexstream2tool();
+				pkt[occupiedinArr] = main_fileRead(pktSize, 1);
+				occupiedinArr = occupiedinArr + 1;
+				if (pktSize > max)
+					max = pktSize;
+			}
+			else if (occupiedinArr == 30)
+				printf("the packets array is full. try to send those in order to get a choise to send others.");
 			break;
 		case(8):
-			if (!pkt) {
-				main_send(pkt.data, pktSize, pkt.size);
+			if (occupiedinArr == 0)
+				printf("the packets array was free in send file.");
+
+			else if (pkt) {
+				main_send(pkt, occupiedinArr, max);
+				occupiedinArr = 0;
 			}
+		
 			break;
 		default:
 			printf("\nthe following is our commands:\n");
