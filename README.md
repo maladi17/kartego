@@ -50,6 +50,7 @@ this is the wireshark look (without the appropriate dissector). pay attention I 
 
 - [x] support in sending packets from wireshark to the wire based on hexstream file.
 Checkout our wireshark_pkt.txt file.
+- [x] support in sending 1-30 packets types in a raw.
 
 ## Authors
 
