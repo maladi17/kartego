@@ -49,7 +49,7 @@ this is the wireshark look (without the appropriate dissector). pay attention I 
 - [x] support to files contains comments (only // for now and in the same line of the hex. Check out our packet.txt example.
 
 - [x] support in sending packets from wireshark to the wire.
-Checkout our wireshark.txt file.
+Checkout our wireshark_pkt.txt file.
 
 ## Authors
 
