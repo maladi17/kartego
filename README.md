@@ -51,6 +51,8 @@ this is the wireshark look (without the appropriate dissector). pay attention I 
 - [x] support in sending packets from wireshark to the wire based on hexstream file.
 Checkout our wireshark_pkt.txt file.
 >> in wireshark select Copy->Bytes->Hex stream, you'll get the hex digits as one long string without white spaces.
+![filter](https://github.com/maladi17/kartego/blob/master/wireshark_filter.jpg)
+
 - [x] support in sending 1-30 packets types in a raw.
 
 ## Authors
