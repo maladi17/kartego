@@ -42,3 +42,5 @@ typedef struct udp_header{
 }udp_header;
 
 struct packetC main_fileRead(int size, int isComment);
+
+int cmd_main();

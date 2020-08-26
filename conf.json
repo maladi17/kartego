@@ -1,0 +1,52 @@
+{
+  "pkt": [
+    {
+      "number": 1,
+      "path": "none",
+      "ispcap": false,
+      "isCommented": false,
+      "times": 10,
+      "delays": 5,
+      "size": 100,
+      "demands": {
+        "size":2,
+        "details":[
+          {
+            "from": 1,
+            "to": 5,
+            "type": "incremental",
+            "in": 1,
+            "format": "le"
+          },
+          {
+            "from": 10,
+            "to": 15,
+            "type": "incremental",
+            "in": 100,
+            "format": "be"
+          }
+        ]
+
+      },
+      "conditions": {
+        "size": 2,
+        "details":[
+          {
+            "index": 67,
+            "eq": "aa",
+            "then": 69,
+            "changesTo": "ab"
+          },
+          {
+            "index": 62,
+            "eq": "ac",
+            "then": 71,
+            "changesTo": "12"
+          }
+        ]
+      }
+
+    }
+
+  ]
+}
