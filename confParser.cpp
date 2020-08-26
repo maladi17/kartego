@@ -2,16 +2,19 @@
 #include <fstream>
 #include "Json.h"
 #include "parser.h"
+#include <stdlib.h>
 
 using namespace std;
 
 
 	confParser::confParser(string name) {
 		fileName = name;
-		ifstream ifs(fileName);
+		try {
+			ifstream ifs(fileName);
+		
 		Json::Reader reader;
 		Json::Value obj;
-		try {
+		
 			reader.parse(ifs, obj); // reader can also read strings
 			const Json::Value& pkts = obj["pkt"]; // array of characters
 			for (int i = 0; i < pkts.size(); i++) {
@@ -48,6 +51,7 @@ using namespace std;
 		catch (int e)
 		{
 			cout << "An exception occurred in the configuration file. Exception Nr. " << e << '\n';
+			abort();
 		}
 	}
 	
