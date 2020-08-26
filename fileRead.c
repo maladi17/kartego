@@ -85,7 +85,7 @@ struct packetC main_fileRead(int size, int isComment) {
 	}
 	printf("enter number of times to run:\n");
 	scanf("%d",&times);
-	printf("enter miliseconds for delay to run:\n");
+	printf("enter seconds for delay to run:\n");
 	scanf("%d",&delay);
 	
 	packetdata.data = packet; 

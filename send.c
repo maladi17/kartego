@@ -5,9 +5,9 @@
 #include "pktheaders.h"
 
 void delay(int mili) { // seconds = mili * 1000
-	
+	int sec = mili * 1000;
 	clock_t start = clock();
-	while (clock() < start + mili) {}
+	while (clock() < start + sec) {}
 
 }
 
