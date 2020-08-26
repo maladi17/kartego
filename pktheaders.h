@@ -5,6 +5,8 @@ struct packetC {
 	u_char *data;
 	int size; //currently owned
 	int total; // size of packet
+	int times; // times to run
+	int delay; // miliseconds of delay after last
 };
 
 typedef struct ip_address{

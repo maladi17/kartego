@@ -33,7 +33,7 @@ struct packetC main_fileRead(int size, int isComment) {
 	char buffer[255];
 	int j = 0;
 	u_char hexC;
-	int num;
+	int num, times = 1, delay = 1;
 	char path[200];
 	int del = 0;
 	u_char *packet;
@@ -83,9 +83,16 @@ struct packetC main_fileRead(int size, int isComment) {
 			exit(1);
 		}
 	}
+	printf("enter number of times to run:\n");
+	scanf("%d",&times);
+	printf("enter miliseconds for delay to run:\n");
+	scanf("%d",&delay);
+	
 	packetdata.data = packet; 
 	packetdata.size = j;
 	packetdata.total = size;
+	packetdata.times = times;
+	packetdata.delay = delay;
 	
 
 	return packetdata;

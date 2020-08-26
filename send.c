@@ -1,8 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <time.h>
 #include "pcap.h"
 #include "pktheaders.h"
+
+void delay(int mili) { // seconds = mili * 1000
+	
+	clock_t start = clock();
+	while (clock() < start + mili) {}
+
+}
 
 int freeAll(struct packetC packet[30], int occupied) {
 	int i;
@@ -15,7 +22,7 @@ int main_send(struct packetC packet[30], int occupiedinArr, int max)
 {
 	pcap_t *fp;
 	int j = 0;
-
+	int h = 0;
 	pcap_if_t *alldevs;
 	pcap_if_t *d;
 	int inum;
@@ -25,7 +32,7 @@ int main_send(struct packetC packet[30], int occupiedinArr, int max)
 	char packet_filter[] = "ip and udp";
 	struct bpf_program fcode;
 	char errbuf[PCAP_ERRBUF_SIZE];
-
+	
 
 	if (pcap_findalldevs_ex(PCAP_SRC_IF_STRING, NULL, &alldevs, errbuf) == -1)
 	{
@@ -85,16 +92,20 @@ int main_send(struct packetC packet[30], int occupiedinArr, int max)
 			packet[j].data[i] = i % 256;
 		}
 	}
+
 	
 	for (j = 0; j < occupiedinArr; j++) {
 		/* Send down the packet */
-		if (pcap_sendpacket(fp, packet[j].data, packet[j].total) != 0)
-		{
-			fprintf(stderr, "\nError sending the packet: \n", pcap_geterr(fp));
-			freeAll(packet, occupiedinArr);
-			return -1;
+		for (h = 0; h < packet[j].times; h++) {
+			if (pcap_sendpacket(fp, packet[j].data, packet[j].total) != 0)
+			{
+				fprintf(stderr, "\nError sending the packet: \n", pcap_geterr(fp));
+				freeAll(packet, occupiedinArr);
+				return -1;
+			}
+			printf("a packet was sent.\n\n");
+			delay(packet[j].delay);
 		}
-		printf("a packet was sent.\n\n");
 	}
 		freeAll(packet, occupiedinArr);
 		
