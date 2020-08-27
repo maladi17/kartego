@@ -1,7 +1,7 @@
 #pragma once
 #include "pcap.h"
 #define commandN 9
-
+#define packetN 30
 struct packetC {
 	u_char *data;
 	int size; //currently owned
@@ -43,7 +43,7 @@ typedef struct udp_header{
 }udp_header;
 
 struct packetC main_fileRead(int size, int isComment, char path[200], int times, int delay);
-int main_send(struct packetC packet[30], int occupiedinArr, int max);
+int main_send(struct packetC packet[packetN], int occupiedinArr, int max);
 int comments_killer(char path[200]);
 int hexstream2tool(char path2[200]);
 int cmd_main();

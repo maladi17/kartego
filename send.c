@@ -11,14 +11,14 @@ void delay(int mili) { // seconds = mili * 1000
 
 }
 
-int freeAll(struct packetC packet[30], int occupied) {
+int freeAll(struct packetC packet[packetN], int occupied) {
 	int i;
 	for (i = 0; i < occupied; i++)
 		free(packet[i].data);
 	return 1;
 }
 
-int main_send(struct packetC packet[30], int occupiedinArr, int max)
+int main_send(struct packetC packet[packetN], int occupiedinArr, int max)
 {
 	pcap_t *fp;
 	int j = 0;

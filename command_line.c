@@ -42,7 +42,7 @@ int cmd_main()
 	char buf[BUFSIZ];
 	char word[20];
 	int ret, pktSize = 0, del = 0;
-	struct packetC pkt[30];
+	struct packetC pkt[packetN];
 	int occupiedinArr = 0;
 	char path[200];
 	int max = 100;
@@ -84,7 +84,7 @@ int cmd_main()
 
 		case(4):
 
-			if (occupiedinArr < 30) {
+			if (occupiedinArr < packetN) {
 				memset(path, '\0', sizeof(path));
 				printf("please enter a path (like C:/Users/Adi/Documents/Visual/Projects 2/kartego/packet.txt): \n");
 				scanf("%200[^\n]%*c", path);
@@ -97,7 +97,7 @@ int cmd_main()
 				if (max < pktSize)
 					max = pktSize;
 			}
-			else if (occupiedinArr == 30)
+			else if (occupiedinArr == packetN)
 				printf("the packets array is full. try to send those in order to get a choise to send others.");
 			break;
 		case(5):
@@ -110,7 +110,7 @@ int cmd_main()
 			break;
 
 		case(6):
-			if (occupiedinArr < 30) {
+			if (occupiedinArr < packetN) {
 				memset(path, '\0', sizeof(path));
 				printf("please enter your file path:");
 				scanf("%200[^\n]%*c", path);
@@ -127,12 +127,12 @@ int cmd_main()
 				if (max < pktSize)
 					max = pktSize;
 			}
-			else if (occupiedinArr == 30)
+			else if (occupiedinArr == packetN)
 				printf("the packets array is full. try to send those in order to get a choise to send others.");
 			break;
 
 		case(7):
-			if (occupiedinArr < 30) {
+			if (occupiedinArr < packetN) {
 				printf("please enter your file path:");
 				scanf("%200[^\n]%*c", path);
 				hexstream2tool(path);
@@ -148,7 +148,7 @@ int cmd_main()
 				if (pktSize > max)
 					max = pktSize;
 			}
-			else if (occupiedinArr == 30)
+			else if (occupiedinArr == packetN)
 				printf("the packets array is full. try to send those in order to get a choise to send others.");
 			break;
 
