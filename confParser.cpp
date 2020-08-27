@@ -11,7 +11,10 @@ using namespace std;
 		fileName = name;
 		try {
 			ifstream ifs(fileName);
-		
+			if (!ifs) {     // If the file was not found, then file is 0, i.e. !file=1 or true.
+				cout << "could not find the file."  << '\n';
+				exit(1);    // The file was not found.
+			}
 		Json::Reader reader;
 		Json::Value obj;
 		
@@ -51,7 +54,7 @@ using namespace std;
 		catch (int e)
 		{
 			cout << "An exception occurred in the configuration file. Exception Nr. " << e << '\n';
-			abort();
+			exit(1);
 		}
 	}
 	
