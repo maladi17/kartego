@@ -41,10 +41,12 @@ int cmd_main()
 {
 	char buf[BUFSIZ];
 	char word[20];
-	int ret, pktSize = 0;
+	int ret, pktSize = 0, del = 0;
 	struct packetC pkt[30];
 	int occupiedinArr = 0;
+	char path[200];
 	int max = 100;
+	int times = 1, delay = 1;
 	banner();
 	helperCommands();
 	printf("let's start =]\n");
@@ -83,7 +85,14 @@ int cmd_main()
 		case(4):
 
 			if (occupiedinArr < 30) {
-				pkt[occupiedinArr] = main_fileRead(pktSize, 0);
+				memset(path, '\0', sizeof(path));
+				printf("please enter a path (like C:/Users/Adi/Documents/Visual/Projects 2/kartego/packet.txt): \n");
+				scanf("%200[^\n]%*c", path);
+				printf("enter number of times to run:\n");
+				scanf("%d", &times);
+				printf("enter seconds for delay to run:\n");
+				scanf("%d", &delay);
+				pkt[occupiedinArr] = main_fileRead(pktSize, 0, path, times,delay);
 				occupiedinArr = occupiedinArr + 1;
 				if (max < pktSize)
 					max = pktSize;
@@ -102,8 +111,18 @@ int cmd_main()
 
 		case(6):
 			if (occupiedinArr < 30) {
-				comments_killer();
-				pkt[occupiedinArr] = main_fileRead(pktSize, 1);
+				memset(path, '\0', sizeof(path));
+				printf("please enter your file path:");
+				scanf("%200[^\n]%*c", path);
+				comments_killer(path);
+				memset(path, '\0', sizeof(path));
+				strncpy(path, "temp.txt", 8);
+				printf("enter number of times to run:\n");
+				scanf("%d", &times);
+				printf("enter seconds for delay to run:\n");
+				scanf("%d", &delay);
+				pkt[occupiedinArr] = main_fileRead(pktSize, 1, path, times,delay);
+				
 				occupiedinArr = occupiedinArr + 1;
 				if (max < pktSize)
 					max = pktSize;
@@ -114,15 +133,25 @@ int cmd_main()
 
 		case(7):
 			if (occupiedinArr < 30) {
-				hexstream2tool();
-				pkt[occupiedinArr] = main_fileRead(pktSize, 1);
+				printf("please enter your file path:");
+				scanf("%200[^\n]%*c", path);
+				hexstream2tool(path);
+				memset(path, '\0', sizeof(path));
+				strncpy(path, "temp.txt", 8);
+				printf("enter number of times to run:\n");
+				scanf("%d", &times);
+				printf("enter seconds for delay to run:\n");
+				scanf("%d", &delay);
+				pkt[occupiedinArr] = main_fileRead(pktSize, 1, path, times,delay);
 				occupiedinArr = occupiedinArr + 1;
+				
 				if (pktSize > max)
 					max = pktSize;
 			}
 			else if (occupiedinArr == 30)
 				printf("the packets array is full. try to send those in order to get a choise to send others.");
 			break;
+
 		case(8):
 			if (occupiedinArr == 0)
 				printf("the packets array was free in send file.");

@@ -27,26 +27,18 @@ int ishexadecimal(char *line) {
 	return 1;
 }
 
-struct packetC main_fileRead(int size, int isComment) {
+struct packetC main_fileRead(int size, int isComment, char path[200], int times, int delay) { //isComment <=> isHexstream
 	struct packetC packetdata;
 	FILE* filePointer;
 	char buffer[255];
 	int j = 0;
 	u_char hexC;
-	int num, times = 1, delay = 1;
-	char path[200];
+	int num;
 	int del = 0;
 	u_char *packet;
 	packet = (unsigned char *)malloc(size * sizeof(int));
 	
-	if (isComment) {
-		memset(path, '\0', sizeof(path));
-		strncpy(path, "temp.txt", 8);
-	}
-	else {
-		printf("please enter a path (like C:/Users/Adi/Documents/Visual/Projects 2/kartego/packet.txt): \n");
-		scanf("%200[^\n]%*c", path);
-	}
+	
 
 	if ((filePointer = fopen(path, "r")) == NULL) {
 		printf("Error! opening file");
@@ -76,6 +68,7 @@ struct packetC main_fileRead(int size, int isComment) {
 	}
 
 	fclose(filePointer);
+
 	if (isComment) {
 		del = remove("temp.txt");
 		if (del) {
@@ -83,10 +76,6 @@ struct packetC main_fileRead(int size, int isComment) {
 			exit(1);
 		}
 	}
-	printf("enter number of times to run:\n");
-	scanf("%d",&times);
-	printf("enter seconds for delay to run:\n");
-	scanf("%d",&delay);
 	
 	packetdata.data = packet; 
 	packetdata.size = j;

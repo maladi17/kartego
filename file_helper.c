@@ -10,12 +10,11 @@ void single_comment();   // handles single line comments
 						 and 2nd is the file in which we copy the code after removing comments  */
 FILE *fp, *fp2;
 
-int comments_killer(void)
+int comments_killer(char path2[200])
 {
-	char path2[200];
+	
 	char c;
-	printf("please enter your file path:");
-	scanf("%200[^\n]%*c", path2);
+	
 	fp = fopen(path2, "r");   // open the first file in read mode
 	if (fp == NULL) {
 		printf("Error! opening file");
@@ -87,13 +86,12 @@ void single_comment()
 
 }
 
-int hexstream2tool(void)
+int hexstream2tool(char path2[200])
 {
-	char path2[200];
+	
 	char c;
 	int letters = 0;
-	printf("please enter your file path:");
-	scanf("%200[^\n]%*c", path2);
+	
 	fp = fopen(path2, "r");   // open the first file in read mode
 	if (fp == NULL) {
 		printf("Error! opening file");

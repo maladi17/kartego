@@ -45,11 +45,7 @@ void main(int argc, char* argv[]) {
 			std::cerr << "Usage: " << argv[0] << std::endl;
 			return;
 		}
-		confParser test(confF);
-
-		
-
-		std::cout << std::endl;
+		initC2R(confF);
 	}
 	else if (confF.compare("-") == 0 && argc == 2) { // if we dont have -conf and more than one val
 		std::cerr << "Usage: " << argv[0] << " -conf={file}" << std::endl;
