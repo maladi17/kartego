@@ -66,6 +66,7 @@ Checkout our wireshark_pkt.txt file.
 - [x] support in fields increment during a couple of times sending.
 By giving the bytes number as follow:
 ![columns](https://github.com/maladi17/kartego/blob/master/description_fields.JPG)
+Pay attention that given the vals from=x, to=y in the conf file, it will change bytes x to y (without y).
 
 ## Authors
 
