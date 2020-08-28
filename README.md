@@ -62,6 +62,8 @@ Checkout our wireshark_pkt.txt file.
 - [x] support of the above features with conf file mode.
 
 - [x] support in fields increment during a couple of times sending.
+By giving the bytes number as follow:
+![columns](https://github.com/maladi17/kartego/blob/master/description_fields.JPG)
 
 ## Authors
 
