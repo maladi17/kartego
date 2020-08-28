@@ -54,12 +54,18 @@ this is the wireshark look (without the appropriate dissector). pay attention I 
 Checkout our wireshark_pkt.txt file.
 >> in wireshark select Copy->Bytes->Hex stream, you'll get the hex digits as one long string without white spaces.
 ![filter](https://github.com/maladi17/kartego/blob/master/wireshark_filter.jpg)
+ By the way, you can send an accurate packet size using this:
+![size of packet](https://github.com/maladi17/kartego/blob/master/size.JPG)
 
 - [x] support in sending 1-30 packets types in a raw.
 
 - [x] support in sending a pkt with a delay and replay it.
 
 - [x] support of the above features with conf file mode.
+
+- [x] support in fields increment during a couple of times sending.
+By giving the bytes number as follow:
+![columns](https://github.com/maladi17/kartego/blob/master/description_fields.JPG)
 
 ## Authors
 
