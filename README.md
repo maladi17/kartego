@@ -61,6 +61,8 @@ Checkout our wireshark_pkt.txt file.
 
 - [x] support of the above features with conf file mode.
 
+- [x] support in fields increment during a couple of times sending.
+
 ## Authors
 
 * **maladi17**- I am really busy, but open for suggestions to improve the repo or bug fixing. just open an issue or leave a mail and I will do my best to improve it.
