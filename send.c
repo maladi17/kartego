@@ -18,6 +18,8 @@ int freeAll(struct packetC packet[packetN], int occupied) {
 	return 1;
 }
 
+
+
 int main_send(struct packetC packet[packetN], int occupiedinArr, int max)
 {
 	pcap_t *fp;
@@ -110,5 +112,107 @@ int main_send(struct packetC packet[packetN], int occupiedinArr, int max)
 		freeAll(packet, occupiedinArr);
 		
 	
+	return 0;
+}
+
+
+
+pcap_t* selectDev(int *num) {
+	pcap_if_t *alldevs;
+	char errbuf[PCAP_ERRBUF_SIZE];
+	pcap_if_t *d;
+	int i = 0;
+	pcap_t *fp;
+	if (pcap_findalldevs_ex(PCAP_SRC_IF_STRING, NULL, &alldevs, errbuf) == -1)
+	{
+		fprintf(stderr, "Error in pcap_findalldevs: %s\n", errbuf);
+		//freeAll(packet, occupiedinArr);
+		exit(1);
+	}
+
+	for (d = alldevs; d; d = d->next)
+	{
+		printf("%d. %s", ++i, d->name);
+		if (d->description)
+			printf(" (%s)\n", d->description);
+		else
+			printf(" (No description available)\n");
+	}
+
+	if (i == 0)
+	{
+		printf("\nNo interfaces found! Make sure WinPcap is installed.\n");
+		//freeAll(packet, occupiedinArr);
+		exit(1);
+	}
+
+	printf("Enter the interface number (1-%d):", i);
+	scanf("%d", num);
+
+	if (*num < 1 || *num > i)
+	{
+		printf("\nInterface number out of range.\n");
+		/* Free the device list */
+		pcap_freealldevs(alldevs);
+		//freeAll(packet, occupiedinArr);
+		exit(1);
+	}
+
+
+
+	/* Jump to the selected adapter */
+	for (d = alldevs, i = 0; i< *num - 1; d = d->next, i++);
+	if ((fp = pcap_open(d->name,            // name of the device
+		100,                // portion of the packet to capture (only the first capacity bytes)
+		PCAP_OPENFLAG_PROMISCUOUS,  // promiscuous mode
+		1000,               // read timeout
+		NULL,               // authentication on the remote machine
+		errbuf              // error buffer
+	)) == NULL)
+	{
+		fprintf(stderr, "\nUnable to open the adapter. %s is not supported by WinPcap\n", d->name);
+		//freeAll(packet, occupiedinArr);
+		return -1;
+	}
+	return fp;
+}
+
+
+
+
+
+
+void sendOne( struct packetC pkt, int inum, pcap_t* fp)
+{
+	
+	int j = 0;
+	int h = 0;
+	pcap_if_t *alldevs;
+	pcap_if_t *d;
+	int i = 0;
+	u_int netmask;
+	pcap_t *adhandle;
+	char packet_filter[] = "ip and udp";
+	struct bpf_program fcode;
+	char errbuf[PCAP_ERRBUF_SIZE];
+
+
+
+
+
+		/* Send down the packet */
+		
+			if (pcap_sendpacket(fp,pkt.data, pkt.total) != 0)
+			{
+				fprintf(stderr, "\nError sending the packet: \n", pcap_geterr(fp));
+				//freeAll(packet, occupiedinArr);
+				return -1;
+			}
+			printf("a packet was sent.\n\n");
+			delay(pkt.delay);
+		
+	
+
+
 	return 0;
 }

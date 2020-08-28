@@ -8,6 +8,7 @@ struct packetC {
 	int total; // size of packet
 	int times; // times to run
 	int delay; // miliseconds of delay after last
+	
 };
 
 typedef struct ip_address{
@@ -47,3 +48,5 @@ int main_send(struct packetC packet[packetN], int occupiedinArr, int max);
 int comments_killer(char path[200]);
 int hexstream2tool(char path2[200]);
 int cmd_main();
+void sendOne(struct packetC pkt, int inum, pcap_t* fp);
+pcap_t* selectDev(int *num);

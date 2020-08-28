@@ -15,9 +15,11 @@ confParser::confParser(string name) { // in is the index in the array
 	
 }
 
+
+
 int confParser::numPackets() {
 
-	
+
 	ifstream ifs(fileName);
 	if (!ifs) {     // If the file was not found, then file is 0, i.e. !file=1 or true.
 		cout << "could not find the file." << '\n';
@@ -30,6 +32,91 @@ int confParser::numPackets() {
 	reader.parse(ifs, obj); // reader can also read strings
 	Json::Value& pkts = obj["pkt"]; // array of characters
 	return pkts.size();
+}
+
+int confParser::fromDemand(int Dindex, int Pindex) {
+
+
+	ifstream ifs(fileName);
+	if (!ifs) {     // If the file was not found, then file is 0, i.e. !file=1 or true.
+		cout << "could not find the file." << '\n';
+		exit(1);    // The file was not found.
+	}
+
+	Json::Reader reader;
+	Json::Value obj;
+
+	reader.parse(ifs, obj); // reader can also read strings
+	Json::Value& pkts = obj["pkt"]; // array of characters
+	return pkts[Pindex]["demands"]["details"][Dindex]["from"].asUInt();
+}
+
+int confParser::toDemand(int Dindex, int Pindex) {
+
+
+	ifstream ifs(fileName);
+	if (!ifs) {     // If the file was not found, then file is 0, i.e. !file=1 or true.
+		cout << "could not find the file." << '\n';
+		exit(1);    // The file was not found.
+	}
+
+	Json::Reader reader;
+	Json::Value obj;
+
+	reader.parse(ifs, obj); // reader can also read strings
+	Json::Value& pkts = obj["pkt"]; // array of characters
+	return pkts[Pindex]["demands"]["details"][Dindex]["to"].asUInt();
+}
+
+int confParser::get_edian(int Dindex, int Pindex) {
+
+
+	ifstream ifs(fileName);
+	if (!ifs) {     // If the file was not found, then file is 0, i.e. !file=1 or true.
+		cout << "could not find the file." << '\n';
+		exit(1);    // The file was not found.
+	}
+
+	Json::Reader reader;
+	Json::Value obj;
+
+	reader.parse(ifs, obj); // reader can also read strings
+	Json::Value& pkts = obj["pkt"]; // array of characters
+	return pkts[Pindex]["demands"]["details"][Dindex]["format"].asUInt();
+}
+
+int confParser::get_demands_size(int index) {
+
+
+	ifstream ifs(fileName);
+	if (!ifs) {     // If the file was not found, then file is 0, i.e. !file=1 or true.
+		cout << "could not find the file." << '\n';
+		exit(1);    // The file was not found.
+	}
+
+	Json::Reader reader;
+	Json::Value obj;
+
+	reader.parse(ifs, obj); // reader can also read strings
+	Json::Value& pkts = obj["pkt"]; // array of characters
+	return  pkts[index]["conditions"]["size"].asUInt();
+}
+
+int confParser::getTimes(int index) {
+
+
+	ifstream ifs(fileName);
+	if (!ifs) {     // If the file was not found, then file is 0, i.e. !file=1 or true.
+		cout << "could not find the file." << '\n';
+		exit(1);    // The file was not found.
+	}
+
+	Json::Reader reader;
+	Json::Value obj;
+
+	reader.parse(ifs, obj); // reader can also read strings
+	Json::Value& pkts = obj["pkt"]; // array of characters
+	return  pkts[index]["times"].asUInt();
 }
 
 struct packetC confParser::buildJsonArr(int index, struct packetC(*fp)(int, int, char[200], int, int)){
