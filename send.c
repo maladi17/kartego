@@ -105,7 +105,7 @@ int main_send(struct packetC packet[packetN], int occupiedinArr, int max)
 				freeAll(packet, occupiedinArr);
 				return -1;
 			}
-			printf("a packet was sent.\n\n");
+			printf("%d. a %d bytes packet was sent.\n\n", j, packet[j].total);
 			delay(packet[j].delay);
 		}
 	}
@@ -197,9 +197,6 @@ void sendOne( struct packetC pkt, int inum, pcap_t* fp)
 	char errbuf[PCAP_ERRBUF_SIZE];
 
 
-
-
-
 		/* Send down the packet */
 		
 			if (pcap_sendpacket(fp,pkt.data, pkt.total) != 0)
@@ -208,7 +205,7 @@ void sendOne( struct packetC pkt, int inum, pcap_t* fp)
 				//freeAll(packet, occupiedinArr);
 				return -1;
 			}
-			printf("a packet was sent.\n\n");
+			printf("a %d byte packet was sent.\n\n", pkt.total);
 			delay(pkt.delay);
 		
 	
