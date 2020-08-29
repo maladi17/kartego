@@ -25,31 +25,40 @@ std::string getCmdOption(int argc, char* argv[], const std::string& option)
 
 
 void main(int argc, char* argv[]) {
-	if (argc > 2) {
-		std::cerr << "Usage: " << argv[0] << " -conf={file}" << std::endl;
+	if (argc !=3 && argc != 1) {
+		std::cerr << "Usage: " << argv[0] << " -conf={file} -t={1 or 0}" << std::endl;
 		std::cerr << "Usage: " << argv[0] << std::endl;
 		return;
 	}
 	std::string confF = getCmdOption(argc, argv, "-conf=");
+	std::string threads = getCmdOption(argc, argv, "-t=");
 	
 
 
-	if (confF.compare("-") == 0 && argc == 1) {  //if there is no -conf and only the name of program.
+	if (argc == 1) {  //if there is no -conf and only the name of program.
 		std::cout << std::endl;
 		cmd_main();
 	}
-	else if (confF.compare("-") != 0) { //if we have -conf there.
+	else if (confF.compare("-") != 0 && threads.compare("-") != 0) { //if we have -conf there and t parameter
 
-		if (confF.compare("") == 0) { //if we have -conf= there.
-			std::cerr << "Usage: " << argv[0] << " -conf={file}" << std::endl;
+		if (confF.compare("") == 0 || threads.compare("") == 0) { //if we have -conf= there.
+			std::cerr << "Usage: " << argv[0] << " -conf={file} -t={1 or 0}" << std::endl;
 			std::cerr << "Usage: " << argv[0] << std::endl;
 			return;
 		}
-		
-		initC2RWithpointers(confF);
+		else if(threads.compare("0") == 0)
+			initC2RWithpointers(confF);
+		else if (threads.compare("1") == 0)
+			initC2RWiththreads(confF);
+		else {
+			std::cerr << "Usage: " << argv[0] << " -conf={file} -t={1 or 0}" << std::endl;
+			std::cerr << "Usage: " << argv[0] << std::endl;
+			return;
+		}
 	}
-	else if (confF.compare("-") == 0 && argc == 2) { // if we dont have -conf and more than one val
-		std::cerr << "Usage: " << argv[0] << " -conf={file}" << std::endl;
+
+	else { // if we dont have 
+		std::cerr << "Usage: " << argv[0] << " -conf={file} -t={1 or 0}" << std::endl;
 		std::cerr << "Usage: " << argv[0] << std::endl;
 		return;
 	}
