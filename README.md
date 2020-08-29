@@ -45,6 +45,15 @@ this is the wireshark look (without the appropriate dissector). pay attention I 
 ### important notes
 - the packet data should be in a txt file in a folder of your choice. a byte per a line in hex (I know...yak)
  - you currently cannot  insert a file which is both commented and a hex stream.
+ - for some unknown reason, when sending a packet over the wire, I can see it twice on wireshark. However, it seems like a known problem which show  a packet the same although there is only one:
+
+A. https://www.mail-archive.com/winpcap-users@winpcap.polito.it/msg01852.html
+
+B. https://winpcap-users.winpcap.narkive.com/jasWFg5j/winpcap-sends-packets-double-or-libpcap-receives-m-double
+
+C. https://www.linuxquestions.org/questions/linux-networking-3/why-i-see-same-packet-twice-on-network-interface-256373/
+
+- in case that you ask for increment in the ip/port/length in the headers, there is no checksum handling.
 
 ### Updates
 
@@ -66,7 +75,9 @@ Checkout our wireshark_pkt.txt file.
 - [x] support in fields increment during a couple of times sending (starting from the second time. The first time will be sent as is).
 By giving the bytes number as follow:
 ![columns](https://github.com/maladi17/kartego/blob/master/description_fields.JPG)
-Pay attention that given the vals from=x, to=y in the conf file, it will change bytes x to y (with y). So if you want to change until byte 3, give it the val of 3 in the to field (in case of big edian.)
+Pay attention that given the vals from=x, to=y in the conf file, it will change bytes x to y (with y). So if you want to change until byte 3, give it the val of 3 in the to field (in case of big edian). The size field is the number of bytes in packets.
+
+- [x] added support in threads in the user is willing to (basicly in cases which one packet has to be sent infinate times and stuck the other packets).
 
 ## Authors
 
