@@ -29,7 +29,7 @@ int GetfromDemand(int Dindex, int Pindex, Json::Value pkts) {
 
 
 	
-	return pkts[Pindex]["demands"]["details"][Dindex]["from"].asUInt();
+	return pkts[Pindex]["demands"]["details"][Dindex]["from"].asInt();
 }
 
 int getTimesFromConf(int index, Json::Value pkts) {
@@ -40,12 +40,12 @@ int getTimesFromConf(int index, Json::Value pkts) {
 int GettoDemand(int Dindex, int Pindex, Json::Value pkts) {
 
 
-	return pkts[Pindex]["demands"]["details"][Dindex]["to"].asUInt();
+	return pkts[Pindex]["demands"]["details"][Dindex]["to"].asInt();
 }
 
 int get_edianDemand(int Dindex, int Pindex, Json::Value pkts) {
 
-	return pkts[Pindex]["demands"]["details"][Dindex]["format"].asUInt();
+	return pkts[Pindex]["demands"]["details"][Dindex]["format"].asInt();
 }
 
 struct packetC buildJsonArrDemand(int index, struct packetC(*fp)(int, int, char[200], int, int), Json::Value pkts) {
@@ -81,7 +81,7 @@ struct packetC buildJsonArrDemand(int index, struct packetC(*fp)(int, int, char[
 int get_sizeDemands(int index, Json::Value pkts) {
 
 
-	return  pkts[index]["conditions"]["size"].asUInt();
+	return  pkts[index]["conditions"]["size"].asInt();
 }
 
 

@@ -42,19 +42,23 @@ int initC2RWithpointers(std::string confF) {
 			if (y != 0) {
 				for (int h = 0; h < get_sizeDemands(i, pkts); h++) { //iterator on the demands
 					carry = 0;
-					from = GetfromDemand(h, i, pkts);
-					to = GettoDemand(h, i, pkts);
-					//we need le check;
+					from = GetfromDemand(h, i, pkts); 
+					to = GettoDemand(h, i, pkts); 
+					
 					edian = get_edianDemand(h, i, pkts);
+					if (to<from || 0>from || pkt[i].size-1 < to) {
+						std::cout << "wrong demand configurations"<< std::endl;
+						exit(1);
+					}
 					if (edian) {
-						for (int j = to; j > from; j--) { //needed to against 30 check. iterator on the bytes to be changed
+						for (int j = to; j > from-1; j--) { // iterator on the bytes to be changed
 							pkt[i].data[j] = inc_field(&carry, (int)(pkt[i].data[j]));
 							if (carry == 0)
 								break;
 						}
 					}
 					else {
-						for (int j = from; j < to; j++) { //needed to against 30 check
+						for (int j = from; j < to+1; j++) { 
 							pkt[i].data[j] = inc_field(&carry, (int)(pkt[i].data[j]));
 							if (carry == 0)
 								break;
