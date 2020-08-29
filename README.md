@@ -53,6 +53,8 @@ B. https://winpcap-users.winpcap.narkive.com/jasWFg5j/winpcap-sends-packets-doub
 
 C. https://www.linuxquestions.org/questions/linux-networking-3/why-i-see-same-packet-twice-on-network-interface-256373/
 
+- in case that you ask for increment in the ip/port/length in the headers, there is no checksum handling.
+
 ### Updates
 
 - [x] support to files contains comments (only // for now and in the same line of the hex. Check out our packet.txt example.
