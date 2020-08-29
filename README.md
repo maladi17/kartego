@@ -74,6 +74,7 @@ Checkout our wireshark_pkt.txt file.
 By giving the bytes number as follow:
 ![columns](https://github.com/maladi17/kartego/blob/master/description_fields.JPG)
 Pay attention that given the vals from=x, to=y in the conf file, it will change bytes x to y (with y). So if you want to change until byte 3, give it the val of 3 in the to field (in case of big edian.)
+The size field is the number of bytes in packets.
 
 ## Authors
 
