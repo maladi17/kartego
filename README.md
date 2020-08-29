@@ -45,6 +45,13 @@ this is the wireshark look (without the appropriate dissector). pay attention I 
 ### important notes
 - the packet data should be in a txt file in a folder of your choice. a byte per a line in hex (I know...yak)
  - you currently cannot  insert a file which is both commented and a hex stream.
+ - for some unknown reason, when sending a packet over the wire, I can see it twice on wireshark. However, it seems like a known problem which show  a packet the same although there is only one:
+
+A. https://www.mail-archive.com/winpcap-users@winpcap.polito.it/msg01852.html
+
+B. https://winpcap-users.winpcap.narkive.com/jasWFg5j/winpcap-sends-packets-double-or-libpcap-receives-m-double
+
+C. https://www.linuxquestions.org/questions/linux-networking-3/why-i-see-same-packet-twice-on-network-interface-256373/
 
 ### Updates
 
