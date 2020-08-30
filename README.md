@@ -2,6 +2,7 @@
 # kartego
 
 A light version of scapy in c  I quickly made during a penetration test.  for windows only.
+use it for educational purposes only and have fun:)
 
 ## Getting Started
 
